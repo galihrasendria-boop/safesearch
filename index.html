@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -128,7 +129,7 @@
         }
 
         #potato {
-            font-size: 180px;
+            font-size: 100px;
             animation: potatoShake 0.1s infinite;
         }
 
@@ -205,10 +206,10 @@
 
 <div id="potatoScreen">
 
-    <div id="potato">💀</div>
+    <div id="potato">Potato</div>
 
     <div id="potatoText">
-        SONN IM CRINE😭😭😭😭😭
+        SONN IM CRINE
     </div>
 
 </div>
@@ -226,17 +227,24 @@ if (!name) {
 
     name = prompt("What is your name?");
 
-    if (!name) {
-        name = "mixedify =💥🔫🐔💥 bang bang chicken gang ";
+    if (!name || name.trim() === "") {
+        name = "Visitor";
     }
 
     localStorage.setItem("safeSearchName", name);
 }
 
-
 document.getElementById("sayHello").innerHTML =
     'Hello <span style="color: violet;">' +
-    name +
+    name.replace(/[&<>"']/g, function(character) {
+        return {
+            "&": "&amp;",
+            "<": "&lt;",
+            ">": "&gt;",
+            '"': "&quot;",
+            "'": "&#39;"
+        }[character];
+    }) +
     '</span>!';
 
 
@@ -300,7 +308,6 @@ function showRandomFact() {
         funFacts[randomNumber];
 }
 
-
 showRandomFact();
 
 
@@ -310,50 +317,49 @@ showRandomFact();
 
 const blockedWords = [
 
-   
     "porn",
     "porno",
     "xxx",
-    "nsfw", 
-    "sex", 
-    "nude", 
-    "nudity", 
-    "hentai", 
-    "adult", 
-    "erotic", 
-    "erotika", 
-    "bogel", 
-    "mesum", 
-    "saru", 
+    "nsfw",
+    "sex",
+    "nude",
+    "nudity",
+    "hentai",
+    "adult",
+    "erotic",
+    "erotika",
+    "bogel",
+    "mesum",
+    "saru",
     "bokep",
-    "casino", 
+    "casino",
     "gambling",
     "judi",
-    "slot", 
-    "poker", 
-    "togel", 
-    "bet", 
-    "lottery", 
-    "taruhan", 
-    "scam", 
+    "slot",
+    "poker",
+    "togel",
+    "bet",
+    "lottery",
+    "taruhan",
+    "scam",
     "phishing",
-    "malware", 
-    "virus", 
-    "trojan", 
-    "ransomware", 
-    "exploit", 
-    "keylogger", 
-    "hack", 
-    "crack", 
-    "warez", 
+    "malware",
+    "virus",
+    "trojan",
+    "ransomware",
+    "exploit",
+    "keylogger",
+    "hack",
+    "crack",
+    "warez",
     "piracy",
-    "gore", 
-    "blood", 
-    "suicide", 
-    "selfharm", 
-    "violence"
-   "https://unsafelink.com/" 
-   
+    "gore",
+    "blood",
+    "suicide",
+    "selfharm",
+    "violence",
+    "https://unsafelink.com/"
+
 ];
 
 
@@ -403,7 +409,7 @@ function searchBing() {
 
                 <div class="result">
 
-                    <strong>Search blocked</strong>
+                    <strong>NOT SAFE - Search blocked</strong>
 
                     <p>
                         SafeSearch blocked this search
@@ -432,10 +438,10 @@ function searchBing() {
 
         <div class="result">
 
-            <strong>Opening Bing...</strong>
+            <strong>SAFE - Opening Bing...</strong>
 
             <p>
-                Your search passed the SafeSearch filter.
+                Your search passed the SafeSearch keyword filter.
             </p>
 
         </div>
@@ -448,7 +454,6 @@ function searchBing() {
     const bingURL =
         "https://www.bing.com/search?q=" +
         encodeURIComponent(query);
-
 
     window.open(
         bingURL,
@@ -485,7 +490,6 @@ function leaveWebsite() {
         .getElementById("mainScreen")
         .style.display = "none";
 
-
     document
         .getElementById("potatoScreen")
         .style.display = "flex";
@@ -496,4 +500,3 @@ function leaveWebsite() {
 
 </body>
 </html>
-skincare
