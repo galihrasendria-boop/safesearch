@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>SafeSearch</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #dbeafe;
+            text-align: center;
+            padding: 30px;
+            margin: 0;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: auto;
+            background: white;
+            padding: 35px;
+            border-radius: 20px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+
+        h1 {
+            color: #2463eb;
+            font-size: 32px;
+        }
+
+        #sayHello {
+            font-size: 20px;
+            margin-bottom: 25px;
+        }
+
+        .safetyTip {
+            background: #eef5ff;
+            border-left: 5px solid #2463eb;
+            padding: 15px;
+            text-align: left;
+            border-radius: 8px;
+            margin-bottom: 30px;
+        }
+
+        .searchArea {
+            margin: 25px 0;
+        }
+
+        #searchBox {
+            width: 60%;
+            padding: 13px;
+            font-size: 16px;
+            border: 2px solid #ccc;
+            border-radius: 8px;
+        }
+
+        #searchButton {
+            padding: 13px 20px;
+            font-size: 16px;
+            background: #2463eb;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        #searchButton:hover {
+            background: #174bb5;
+        }
+
+        #funFact {
+            margin: 25px auto;
+            font-size: 16px;
+            font-weight: bold;
+            min-height: 25px;
+        }
+
+        #results {
+            margin-top: 20px;
+            text-align: left;
+        }
+
+        .result {
+            background: #f8fafc;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            padding: 15px;
+            margin: 12px 0;
+        }
+
+        .result a {
+            color: #2463eb;
+            font-size: 19px;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        .result a:hover {
+            text-decoration: underline;
+        }
+
+        #leaveButton {
+            margin-top: 25px;
+            padding: 12px 20px;
+            background: #777;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 15px;
+        }
+
+        #leaveButton:hover {
+            background: #555;
+        }
+
+        #potatoScreen {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: black;
+            color: white;
+            z-index: 9999;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+
+        #potato {
+            font-size: 180px;
+            animation: potatoShake 0.1s infinite;
+        }
+
+        #potatoText {
+            font-size: 35px;
+            font-weight: bold;
+        }
+
+        @keyframes potatoShake {
+            0% {
+                transform: rotate(-10deg) scale(1);
+            }
+
+            50% {
+                transform: rotate(10deg) scale(1.1);
+            }
+
+            100% {
+                transform: rotate(-10deg) scale(1);
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container" id="mainScreen">
+
+    <h1>SafeSearch</h1>
+
+    <p id="sayHello"></p>
+
+    <div class="safetyTip">
+        <strong>Safety Tip</strong>
+
+        <p>
+            Always be careful when clicking links.
+            Do not enter personal information on websites you do not trust.
+        </p>
+    </div>
+
+    <div class="searchArea">
+
+        <input
+            type="text"
+            id="searchBox"
+            placeholder="Search the web..."
+        >
+
+        <button
+            id="searchButton"
+            onclick="searchBing()"
+        >
+            Search
+        </button>
+
+    </div>
+
+    <div id="funFact"></div>
+
+    <div id="results"></div>
+
+    <button
+        id="leaveButton"
+        onclick="leaveWebsite()"
+    >
+        Leave SafeSearch
+    </button>
+
+</div>
+
+
+<!-- POTATO SCREEN -->
+
+<div id="potatoScreen">
+
+    <div id="potato">💀</div>
+
+    <div id="potatoText">
+        SONN IM CRINE😭😭😭😭😭
+    </div>
+
+</div>
+
+
+<script>
+
+/* =================================
+   NAME
+================================= */
+
+let name = localStorage.getItem("safeSearchName");
+
+if (!name) {
+
+    name = prompt("What is your name?");
+
+    if (!name) {
+        name = "mixedify =💥🔫🐔💥 bang bang chicken gang ";
+    }
+
+    localStorage.setItem("safeSearchName", name);
+}
+
+
+document.getElementById("sayHello").innerHTML =
+    'Hello <span style="color: violet;">' +
+    name +
+    '</span>!';
+
+
+/* =================================
+   DUMB FUN FACTS
+================================= */
+
+const funFacts = [
+
+    "Fun fact: Wombats poop cubes.",
+    "Fun fact: Penguins have knees.",
+    "Fun fact: Sharks existed before trees.",
+    "Fun fact: Bananas are berries.",
+    "Fun fact: Strawberries are not technically berries.",
+    "Fun fact: A shrimp's heart is in its head.",
+    "Fun fact: Cows can have best friends.",
+    "Fun fact: Octopuses have three hearts.",
+    "Fun fact: Butterflies taste with their feet.",
+    "Fun fact: Some turtles can breathe through their butts.",
+    "Fun fact: Goats have rectangular pupils.",
+    "Fun fact: Goats can climb trees.",
+    "Fun fact: Elephants cannot jump.",
+    "Fun fact: A group of flamingos is called a flamboyance.",
+    "Fun fact: A group of crows is called a murder.",
+    "Fun fact: A group of hippos is called a bloat.",
+    "Fun fact: Snails can have thousands of tiny teeth.",
+    "Fun fact: Some frogs can freeze and survive.",
+    "Fun fact: Rats laugh when they are tickled.",
+    "Fun fact: Jellyfish do not have brains.",
+    "Fun fact: Starfish do not have brains either.",
+    "Fun fact: A giraffe has seven neck bones, just like humans.",
+    "Fun fact: Horses cannot breathe through their mouths.",
+    "Fun fact: Ravens can imitate human speech.",
+    "Fun fact: Crows can recognize human faces.",
+    "Fun fact: Some ants farm fungi for food.",
+    "Fun fact: Ducks have waterproof feathers.",
+    "Fun fact: Sea cucumbers can eject their organs.",
+    "Fun fact: Goats have accents.",
+    "Fun fact: This fact has no useful purpose whatsoever.",
+    "Fun fact: Your search bar is probably judging you.",
+    "Fun fact: Somewhere, a pigeon is walking around with absolutely no plan.",
+    "Fun fact: Potatoes have done nothing wrong.",
+    "Fun fact: This website has more potatoes than necessary.",
+    "Fun fact: A snail can sleep for years.",
+    "Fun fact: Your computer probably knows you pressed the button.",
+    "Fun fact: A potato is not impressed by your search query.",
+    "Fun fact: Somewhere right now, someone forgot why they opened a website.",
+    "Fun fact: This is probably the least important thing you will learn today.",
+    "Fun fact: Your browser has absolutely no idea what you are doing.",
+    "Fun fact: You just read a completely unnecessary fact."
+
+];
+
+
+function showRandomFact() {
+
+    const randomNumber =
+        Math.floor(Math.random() * funFacts.length);
+
+    document.getElementById("funFact").innerText =
+        funFacts[randomNumber];
+}
+
+
+showRandomFact();
+
+
+/* =================================
+   BLOCKED WORDS
+================================= */
+
+const blockedWords = [
+
+   
+    "porn",
+    "porno",
+    "xxx",
+    "nsfw", 
+    "sex", 
+    "nude", 
+    "nudity", 
+    "hentai", 
+    "adult", 
+    "erotic", 
+    "erotika", 
+    "bogel", 
+    "mesum", 
+    "saru", 
+    "bokep",
+    "casino", 
+    "gambling",
+    "judi",
+    "slot", 
+    "poker", 
+    "togel", 
+    "bet", 
+    "lottery", 
+    "taruhan", 
+    "scam", 
+    "phishing",
+    "malware", 
+    "virus", 
+    "trojan", 
+    "ransomware", 
+    "exploit", 
+    "keylogger", 
+    "hack", 
+    "crack", 
+    "warez", 
+    "piracy",
+    "gore", 
+    "blood", 
+    "suicide", 
+    "selfharm", 
+    "violence"
+   "https://unsafelink.com/" 
+   
+];
+
+
+/* =================================
+   BING SEARCH
+================================= */
+
+function searchBing() {
+
+    const searchBox =
+        document.getElementById("searchBox");
+
+    const query =
+        searchBox.value.trim();
+
+    const results =
+        document.getElementById("results");
+
+
+    /* EMPTY SEARCH */
+
+    if (query === "") {
+
+        results.innerHTML = `
+            <div class="result">
+                Please enter something to search.
+            </div>
+        `;
+
+        showRandomFact();
+
+        return;
+    }
+
+
+    /* SAFE SEARCH FILTER */
+
+    const lowerQuery =
+        query.toLowerCase();
+
+
+    for (let word of blockedWords) {
+
+        if (lowerQuery.includes(word)) {
+
+            results.innerHTML = `
+
+                <div class="result">
+
+                    <strong>Search blocked</strong>
+
+                    <p>
+                        SafeSearch blocked this search
+                        because it contains a restricted word.
+                    </p>
+
+                </div>
+
+            `;
+
+            showRandomFact();
+
+            return;
+        }
+    }
+
+
+    /* SHOW RANDOM FACT */
+
+    showRandomFact();
+
+
+    /* SHOW MESSAGE */
+
+    results.innerHTML = `
+
+        <div class="result">
+
+            <strong>Opening Bing...</strong>
+
+            <p>
+                Your search passed the SafeSearch filter.
+            </p>
+
+        </div>
+
+    `;
+
+
+    /* OPEN BING */
+
+    const bingURL =
+        "https://www.bing.com/search?q=" +
+        encodeURIComponent(query);
+
+
+    window.open(
+        bingURL,
+        "_blank"
+    );
+
+}
+
+
+/* =================================
+   ENTER KEY
+================================= */
+
+document
+    .getElementById("searchBox")
+    .addEventListener("keypress", function(event) {
+
+        if (event.key === "Enter") {
+
+            searchBing();
+
+        }
+
+    });
+
+
+/* =================================
+   LEAVE = POTATO
+================================= */
+
+function leaveWebsite() {
+
+    document
+        .getElementById("mainScreen")
+        .style.display = "none";
+
+
+    document
+        .getElementById("potatoScreen")
+        .style.display = "flex";
+
+}
+
+</script>
+
+</body>
+</html>
+skincare
