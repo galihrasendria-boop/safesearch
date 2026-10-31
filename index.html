@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -202,8 +201,6 @@
 </div>
 
 
-<!-- POTATO SCREEN -->
-
 <div id="potatoScreen">
 
     <div id="potato">Potato</div>
@@ -249,7 +246,7 @@ document.getElementById("sayHello").innerHTML =
 
 
 /* =================================
-   DUMB FUN FACTS
+   FUN FACTS
 ================================= */
 
 const funFacts = [
@@ -332,6 +329,7 @@ const blockedWords = [
     "mesum",
     "saru",
     "bokep",
+
     "casino",
     "gambling",
     "judi",
@@ -341,6 +339,7 @@ const blockedWords = [
     "bet",
     "lottery",
     "taruhan",
+
     "scam",
     "phishing",
     "malware",
@@ -353,43 +352,32 @@ const blockedWords = [
     "crack",
     "warez",
     "piracy",
+
     "gore",
     "blood",
     "suicide",
     "selfharm",
     "violence",
-    "https://unsafelink.com/
-    "porn",
-    "porno",
-    "xxx",
-    "nsfw",
-    "sex",   
-    "nude",
-    "nudity",
-    "hentai",
-    "adult",
-    "casino",
-    "gambling",
-    "scam",
-    "phishing",
-    "dick",
     "murder",
-    "butt",
+    "murderer",
     "killer",
+    "kill",
+    "weapon",
+
+    "dick",
+    "butt",
     "breast",
     "private parts",
     "cock",
-    "BIG BOOTY MITSURI",
+    "big booty mitsuri",
     "biji",
     "kissing",
     "gay men",
     "6ix9ine",
     "sexy",
     "ara ara",
-    "murderer",
-    "butt",
-    
-    
+
+    "https://unsafelink.com/"
 
 ];
 
@@ -426,11 +414,10 @@ function searchBing() {
     }
 
 
-    /* SAFE SEARCH FILTER */
+    /* CHECK BLOCKED WORDS */
 
     const lowerQuery =
         query.toLowerCase();
-
 
     for (let word of blockedWords) {
 
@@ -458,12 +445,9 @@ function searchBing() {
     }
 
 
-    /* SHOW RANDOM FACT */
+    /* SAFE SEARCH */
 
     showRandomFact();
-
-
-    /* SHOW MESSAGE */
 
     results.innerHTML = `
 
@@ -503,9 +487,7 @@ document
     .addEventListener("keypress", function(event) {
 
         if (event.key === "Enter") {
-
             searchBing();
-
         }
 
     });
