@@ -11,7 +11,6 @@
             text-align: center;
             padding: 30px;
             margin: 0;
-            color: #243047;
         }
 
         .container {
@@ -86,6 +85,17 @@
             border-radius: 10px;
             padding: 15px;
             margin: 12px 0;
+        }
+
+        .result a {
+            color: #2463eb;
+            font-size: 19px;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        .result a:hover {
+            text-decoration: underline;
         }
 
         #leaveButton {
@@ -215,7 +225,7 @@ let name = localStorage.getItem("safeSearchName");
 
 if (!name) {
 
-    name = prompt("What's your verity ahh name?");
+    name = prompt("What is your name?");
 
     if (!name || name.trim() === "") {
         name = "Visitor";
@@ -287,6 +297,7 @@ const funFacts = [
     "Fun fact: You just read a completely unnecessary fact."
 
 ];
+
 
 function showRandomFact() {
 
@@ -438,13 +449,16 @@ function searchBing() {
     `;
 
 
-    /* OPEN BING IN SAME TAB */
+    /* OPEN BING */
 
     const bingURL =
         "https://www.bing.com/search?q=" +
         encodeURIComponent(query);
 
-    window.location.href = bingURL;
+    window.open(
+        bingURL,
+        "_blank"
+    );
 
 }
 
@@ -458,7 +472,9 @@ document
     .addEventListener("keypress", function(event) {
 
         if (event.key === "Enter") {
+
             searchBing();
+
         }
 
     });
